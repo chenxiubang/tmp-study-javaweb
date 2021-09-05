@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>钉钉登录</title>
+</head>
+<body>
+<div id="login_container"></div>
+</body>
+<script src="https://g.alicdn.com/dingding/dinglogin/0.0.5/ddLogin.js"></script>
+<script>
+    <!-- 配置的回调URL(重定向页面)需要和后台配置的一致 否则会提示权限不足-->
+    <!-- ***重定向地址建议使用前端页面（文档说明）***-->
+
+    let REDIRECT_URI = "https://www.qier.com";
+
+    let GOTO_URL = encodeURIComponent("https://oapi.dingtalk.com/connect/oauth2/sns_authorize?appid=dingbqhpgkq2ie8se2ah&response_type=code&scope=snsapi_login&state=STATE&redirect_uri=" + REDIRECT_URI)
+    console.log("url编码", GOTO_URL)
+
+    let obj = DDLogin({
+        //这里需要你在自己的页面定义一个HTML标签并设置id，例如<div id="login_container"></div>或<span id="login_container"></span>
+        id: "login_container",
+
+        //goto参数结构：https://oapi.dingtalk.com/connect/oauth2/sns_authorize?appid=SuiteKey&response_type=code&scope=snsapi_login&state=STATE&redirect_uri=REDIRECT_URI
+        // 并且要将goto参数urlencode编码。
+        goto: GOTO_URL,
+
+        //渲染二维码的区域的样式，可以自定义去除背景颜色和边框。
+        style: "border:none;background-color:#FFFFFF;",
+
+        //表示显示二维码的区域的宽。
+        // width和height不代表二维码的大小，二维码大小是固定的210px*210px。
+        width: "365",
+
+        // 表示显示二维码的区域的高。
+        // width和height不代表二维码的大小，二维码大小是固定的210px*210px。
+        height: "400"
+    });
+
+
+    let handleMessage = function (event) {
+        let origin = event.origin;
+        console.log("origin", event.origin);
+        if (origin === "https://login.dingtalk.com") { //判断是否来自ddLogin扫码事件。
+            let loginTmpCode = event.data;
+            //获取到loginTmpCode后就可以在这里构造跳转链接进行跳转了
+            console.log("loginTmpCode", loginTmpCode);
+        }
+    };
+
+    if (typeof window.addEventListener != 'undefined') {
+        window.addEventListener('message', handleMessage, false);
+    } else if (typeof window.attachEvent != 'undefined') {
+        window.attachEvent('onmessage', handleMessage);
+    }
+
+</script>
+</html>
