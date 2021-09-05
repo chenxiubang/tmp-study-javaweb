@@ -9,13 +9,27 @@
 </body>
 <script src="https://g.alicdn.com/dingding/dinglogin/0.0.5/ddLogin.js"></script>
 <script>
-    <!-- 配置的回调URL(重定向页面)需要和后台配置的一致 否则会提示权限不足-->
+    <!--
+    配置的回调URL(重定向页面)
+    需要和后台配置的一致
+    否则会提示权限不足-->
     <!-- ***重定向地址建议使用前端页面（文档说明）***-->
 
     let REDIRECT_URI = "https://www.qier.com";
 
-    let GOTO_URL = encodeURIComponent("https://oapi.dingtalk.com/connect/oauth2/sns_authorize?appid=dingbqhpgkq2ie8se2ah&response_type=code&scope=snsapi_login&state=STATE&redirect_uri=" + REDIRECT_URI)
-    console.log("url编码", GOTO_URL)
+    // 如果是企业内部应用，appid则为应用的AppKey。如果是第三方企业应用，appid则为应用的SuiteKey。
+    let APP_ID = "dingbqhpgkq2ie8se2ah";
+
+    let GOTO_URL =
+        "https://oapi.dingtalk.com/connect/oauth2/sns_authorize?appid="
+        + APP_ID
+        + "&response_type=code&scope=snsapi_login&state=STATE&redirect_uri="
+        + REDIRECT_URI;
+
+    // 如果是第二种方式则需要将JS goto参数整体urlencode编码，不要单独对redirect_uri编码，该地址为步骤一中配置的回调域名。
+    let GOTO_URL_ENCODE = encodeURIComponent(GOTO_URL);
+
+    console.log("url编码处理后", GOTO_URL_ENCODE)
 
     let obj = DDLogin({
         //这里需要你在自己的页面定义一个HTML标签并设置id，例如<div id="login_container"></div>或<span id="login_container"></span>
@@ -23,7 +37,7 @@
 
         //goto参数结构：https://oapi.dingtalk.com/connect/oauth2/sns_authorize?appid=SuiteKey&response_type=code&scope=snsapi_login&state=STATE&redirect_uri=REDIRECT_URI
         // 并且要将goto参数urlencode编码。
-        goto: GOTO_URL,
+        goto: GOTO_URL_ENCODE,
 
         //渲染二维码的区域的样式，可以自定义去除背景颜色和边框。
         style: "border:none;background-color:#FFFFFF;",
