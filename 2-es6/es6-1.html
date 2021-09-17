@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+	
+
+	//var 可以重复声明
+	var a = '互办傻狗';
+	var a = '互办傻B';
+
+	//用es6新特性 let 不能重复声明 会报错
+	let b = '互办傻逼公司';
+	// let b = '互办出门被车撞';
+
+
+	//es6新特性 块级作用域 变量的作用域只在代码块中生效
+	//这个代码块 包括 if else for while 等一系列代码块
+	{
+		let c = '互办傻吊';
+		console.log(c);
+
+		var d = "我没有块级作用域，因为我是var"
+	}
+	// window.alert(c);
+	window.alert(d);
+
+
+
+
+	//用var声明 如果使用在var之前，会给一个undefined（变量提升，隐藏提前申明)
+	console.log(sb);
+	var sb = "我是廷康他爹"
+
+	//但是用let关键字不存在变量提升
+	// console.log(sb2);
+	let sb2 = "我是杨树鹏他爹";
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+原生ajax（js实现）post方式访问接口
+-->
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        //定义一个方法然后onload执行
+        function init() {
+            let req; //这是请求变量
+            if (window.XMLHttpRequest) {    //大部分浏览器都支持XMLHttpReques
+                req = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            } else {
+                alert("错误！");
+            }
+            //post请求  地址url， true为异步
+
+            req.open("post", "http://115.236.162.166:18081/smk_yhqrcode/front/bury/datalog/getUser", true);
+
+            //设置head头必要放到open的后面 ↑
+
+            req.setRequestHeader("Content-type","application/x-www-form-urlencoded");//这里用form-data方式
+            var params = "token="+"默认值:accesstoken123456";
+            req.send(params);//send方法的参数是给post方法传参用的
+            req.onreadystatechange = function () {
+                if (req.readyState === 4) { //4标识请求有响应 然后继续判断状态码
+                    if (req.status === 200) {
+                        let data = req.responseText;
+                        console.log("最后返回的数据是", data);
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+
+</body>
+</html>

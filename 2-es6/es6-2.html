@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+
+	<div class="box" style="background: red;height: 20px"></div>
+	<div class="box" style="background: red;height: 20px"></div>
+	<div class="box" style="background: red;height: 20px"></div>
+
+
+	<script>
+		/*
+			这里我写了三个box，循环为每个box绑定了一个点击事件，但打印的i始终会是最大的，因为var声明没有块级作用域，最后循环结束成为了全局的变量
+			*/
+		var boxs = document.getElementsByClassName("box");
+
+		for (var i = 0 ; i < boxs.length; i++) {
+			boxs[i].onclick =function (argument) {
+				// body...
+				alert("hello box" + i);
+			}
+		}
+
+
+		//用let声明解决这个问题
+		for(let i = 0; i < boxs.length ; i++) {
+			boxs[i].onclick = function(argument) {
+				console.log("hello box"+i);
+			}
+		}
+
+	</script>
+
+</body>
+</html>
