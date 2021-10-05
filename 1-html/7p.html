@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>段落标签p和css样式</title>
+</head>
+
+<style>
+    p {
+        /*
+        段落文字的颜色
+         */
+        color: blue;
+
+        /*
+        字符间距
+         */
+        letter-spacing: 8px;
+
+        /*
+        行高（非字高）
+         */
+        line-height: 40px;
+
+        /*
+          文本对齐方式
+         */
+        text-align: left;
+
+        /*
+        文本装饰效果 underline：下划线
+         */
+        text-decoration: underline;
+
+        /*
+        首行缩进
+         */
+        text-indent: 40px;
+
+        /*
+        规定如何解释文本中的空白 nowrap 文本不换行，除非遇到br标签
+        （超过屏幕范围也不会换行）
+        */
+        white-space: nowrap
+
+    }
+
+    a{
+        /*
+        a标签默认有下划线，用text-decoration将其隐藏下划线
+         */
+        text-decoration: none;
+    }
+</style>
+
+<body>
+<p>
+    支付宝开放平台基于支付宝海量用户，将强大的支付、营销、数据等能力，通过接口等形式开放给开发者，开发者可通过支付宝 SDK 等工具快速将能力集成至自身网页、移动应用中。
+</p>
+
+<a>这是超链接</a>
+</body>
+</html>
